@@ -1,0 +1,30 @@
+public void CrearCopiaDeSeguridad()
+    {
+        try 
+        {
+            int x=Dialogo.showSaveDialog(this);
+            if(x==0)
+            {
+                File F = Dialogo.getSelectedFile();
+                String RutaFile = F.getPath();
+           
+                String Ruta = "C:\\Archivos de programa\\MySQL\\MySQL Server 5.0\\bin\\mysqldump.exe";
+                String Clave = "clave";
+                String Usuario = "user";
+                String db = "base";
+
+                String cad = "\"" + Ruta + "\" --opt --password=" + clave + " --user=" + user + " " + base + " > \"" + RutaFile +"\"\n";
+                File fcopi = new File("copia_seguridad.bat");
+                FileWriter fw = new FileWriter(fcopi);
+                fw.write(cad, 0, cad.length());
+                fw.close();
+                Runtime.getRuntime().exec("copia_Seguridad.bat");
+                JOptionPane.showMessageDialog(this, "Creación De Copia De Seguridad Realizada Con Exito");
+            }
+            else
+            {
+              JOptionPane.showMessageDialog(this, "Creación De Copia De Seguridad Cancelada Por El Usuario");
+            }
+        } catch (Exception ex)  {ex.printStackTrace();}
+    }
+https://groups.google.com/forum/#!usersettings/general
